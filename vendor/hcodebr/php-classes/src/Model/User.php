@@ -76,7 +76,7 @@ class User extends Model {
 
 		$sql = new Sql();
 
-		return $sql->select("SELECT * FROM tb_users a JOIN tb_persons b ON(a.idperson = b.idperson) ORDER BY b.desperson");
+		return $sql->select("SELECT * FROM tb_users a JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
 
 	}
 
