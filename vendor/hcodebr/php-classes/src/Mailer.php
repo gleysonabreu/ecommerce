@@ -8,8 +8,8 @@
 	 */
 	class Mailer
 	{
-		const USERNAME = 'xxxxxx@gmail.com';
-		const PASSWORD = 'xxxxxx';
+		const USERNAME = 'xx@gmail.com';
+		const PASSWORD = 'xx';
 		const NAMEFROM = 'Wulf Store';
 
 		private $mail;
