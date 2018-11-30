@@ -178,7 +178,7 @@ class User extends Model {
 
 	}
 
-	public static function getForgot($email){
+	public static function getForgot($email, $inadmin = true){
 
 		$sql = new Sql();
 
@@ -219,7 +219,16 @@ class User extends Model {
 						User::SECRET_IV
 					));
 
-					$link = "http://www.wulf.com/admin/forgot/reset?code=$code";
+
+					if($inadmin === true) {
+
+                        $link = "http://www.wulf.com/admin/forgot/reset?code=$code";
+
+					}else{
+
+                        $link = "http://www.wulf.com/forgot/reset?code=$code";
+
+                    }
 
 					$mailer = new Mailer($data['desemail'], $data['desperson'], "Redefinir senha Wulf Store", "forgot", array(
 						"name"=>$data['desperson'],
