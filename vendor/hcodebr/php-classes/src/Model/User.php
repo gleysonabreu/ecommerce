@@ -12,9 +12,11 @@ class User extends Model {
 	const SECRET_IV = 'senhatorecoveryw';
 	const SECRET  = "senhatorecoveryw";
 	const ERROR = "UserError";
+	const ERROR_REGISTER = 'UserErrorRegister';
+
 
 	protected $fields = [
-		"iduser", "idperson", "deslogin", "despassword", "inadmin", "dtergister", "nrphone", "desemail", "desperson", "desperson"
+		"iduser", "idperson", "deslogin", "despassword", "inadmin", "dtergister", "nrphone", "desemail", "desperson"
 	];
 
 
@@ -121,13 +123,14 @@ class User extends Model {
 
 		$results = $sql->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)",
 			array(
-			":desperson"=>$this->utf8_decode(getdesperson()),
+			":desperson"=>utf8_decode($this->getdesperson()),
 			":deslogin"=>$this->getdeslogin(),
 			":despassword"=>User::getPasswordHash($this->getdespassword()),
 			":desemail"=>$this->getdesemail(),
 			":nrphone"=>$this->getnrphone(),
 			":inadmin"=>$this->getinadmin()
 		));
+
 		$this->setData($results[0]);
 	}
 
@@ -320,6 +323,33 @@ class User extends Model {
 	        'cost'=>12
         ]);
 
+    }
+
+    public static function setErrorREgister($msg){
+        $_SESSION[User::ERROR_REGISTER]  = $msg;
+    }
+
+    public static function getErrorRegister(){
+
+        $msg = (isset($_SESSION[User::ERROR_REGISTER])) ? $_SESSION[User::ERROR_REGISTER] : "";
+
+        User::clearErrorRegister();
+
+        return $msg;
+
+    }
+
+    public  static function clearErrorRegister(){
+        $_SESSION[User::ERROR_REGISTER] = NULL;
+    }
+
+    public static function checkLoginExist($login){
+	    $sql = new Sql();
+	    $results = $sql->select("SELECT * FROM tb_users WHERE deslogin = :deslogin", [
+	        ':deslogin'=>$login
+        ]);
+
+	    return (count($results) > 0 );
     }
 }
 
