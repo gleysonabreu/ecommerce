@@ -142,6 +142,7 @@ $app->get("/checkout", function(){
     }
 
     if(!$address->getdesaddress()) $address->setdesaddress('');
+    if(!$address->getdesnumber()) $address->setdesnumber('');
     if(!$address->getdescomplement()) $address->setdescomplement('');
     if(!$address->getdesdistrict()) $address->setdesdistrict('');
     if(!$address->getdescity()) $address->setdescity('');
@@ -207,8 +208,11 @@ $app->post("/checkout", function (){
     $_POST['idperson'] = $user->getidperson();
 
 
-    $address->setData($_POST);
-    $address->save();
+    var_dump($_POST);
+
+    var_dump($address->setData($_POST));
+    var_dump($address->save());
+    exit;
 
     header("Location: /order");
     exit;
