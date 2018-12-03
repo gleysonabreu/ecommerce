@@ -201,18 +201,22 @@ $app->post("/checkout", function (){
         header("Location: /checkout");
         exit;
     }
+    if(!isset($_POST['desnumber']) || $_POST['desnumber'] === ''){
+        Address::setMsgError("Informe o número da sua casa.");
+        header("Location: /checkout");
+        exit;
+    }
 
-    $address = new Address();
 
     $_POST['deszipcode'] = $_POST['zipcode'];
     $_POST['idperson'] = $user->getidperson();
 
+    $address = new Address();
 
-    var_dump($_POST);
 
-    var_dump($address->setData($_POST));
-    var_dump($address->save());
-    exit;
+
+    $address->setData($_POST);
+    $address->save();
 
     header("Location: /order");
     exit;

@@ -7,7 +7,7 @@ use \Hcode\DB\Sql;
 
 class Address extends Model {
     protected $fields = [
-        "idaddress", "idperson", "desaddress", 'descomplement', 'desdistrict', 'descity', 'desstate', 'descountry', 'desnumber'
+        "idaddress", "idperson", "desaddress", 'descomplement', 'desdistrict', 'descity', 'desstate', 'descountry', 'desnumber', 'deszipcode'
     ];
     const SESSION_ERROR = 'AddressError';
     public static function getCep($nrcep){
@@ -54,14 +54,14 @@ class Address extends Model {
         $results = $sql->select("CALL sp_addresses_save(:idaddress, :idperson, :desaddress, :desnumber, :descomplement, :descity, :desstate, :descountry, :deszipcode, :desdistrict)", [
             ':idaddress'=> $this->getidaddress(),
             ':idperson'=> $this->getidperson(),
-            ':desaddress'=> $this->getdesaddress(),
+            ':desaddress'=> utf8_decode($this->getdesaddress()),
             ':desnumber'=> $this->getdesnumber(),
-            ':descomplement'=> $this->getdescomplement(),
-            ':descity'=> $this->getdescity(),
-            ':desstate'=> $this->getdesstate(),
-            ':descountry'=> $this->getdescountry(),
+            ':descomplement'=> utf8_decode($this->getdescomplement()),
+            ':descity'=> utf8_decode($this->getdescity()),
+            ':desstate'=> utf8_decode($this->getdesstate()),
+            ':descountry'=> utf8_decode($this->getdescountry()),
             ':deszipcode'=> $this->getdeszipcode(),
-            ':desdistrict'=> $this->getdesdistrict()
+            ':desdistrict'=> utf8_decode($this->getdesdistrict())
         ]);
 
         if(count($results) > 0){
