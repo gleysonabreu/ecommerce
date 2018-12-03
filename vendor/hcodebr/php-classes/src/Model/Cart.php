@@ -10,7 +10,7 @@ use \Hcode\Model\Product;
 
 class Cart extends Model {
 	protected $fields = [
-		"idcart", "dessessionid", "iduser", "deszipcode", "vlfreight", "nrdays", "nrqtd", 'vltotal', 'vlsubtotal'
+		"idcart", "dessessionid", "iduser", "deszipcode", "vlfreight", "nrdays", "nrqtd", 'vltotal', 'vlsubtotal', "totals"
 	];
 
 	const SESSION = "Cart";

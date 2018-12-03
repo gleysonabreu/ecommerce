@@ -4,7 +4,11 @@
     use \Hcode\Model;
     class Order extends Model{
         protected $fields = [
-            "idorder","idcart","iduser","idstatus","idaddress","vltotal"
+            "idorder","idcart","iduser","idstatus","idaddress","vltotal", "desperson", "dtregister", "desstatus",
+            "dtregister", "dessessionid", "iduser", "deszipcode", "vlfreight", "nrdays", "dtregister", "iduser",
+            "idperson", "deslogin", "despassword", "inadmin", "dtregister", "idperson", "desaddress", "desnumber",
+            "descomplement", "descity", "desstate", "descountry", "deszipcode", "desdistrict", "dtregister", "idperson",
+            "desperson", "desemail", "nrphone", "dtregister"
         ];
         public function save(){
 
@@ -41,6 +45,7 @@
                 ':idorder'=>$idorder
 
             ]);
+
 
             if(count($results) > 0){
                 $this->setData($results[0]);
