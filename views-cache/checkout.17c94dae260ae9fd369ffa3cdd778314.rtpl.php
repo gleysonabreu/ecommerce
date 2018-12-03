@@ -63,7 +63,7 @@
 											<label class="" for="billing_state">País</label>
 											<input type="text" id="billing_state" name="descountry" placeholder="País" value="<?php echo htmlspecialchars( $address["descountry"], ENT_COMPAT, 'UTF-8', FALSE ); ?>" class="input-text ">
 										</p>
-										
+
 										<div class="clear"></div>
 										<h3 id="order_review_heading" style="margin-top:30px;">Detalhes do Pedido</h3>
 										<div id="order_review" style="position: relative;">

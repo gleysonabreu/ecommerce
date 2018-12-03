@@ -7,7 +7,7 @@ use \Hcode\DB\Sql;
 
 class Address extends Model {
     protected $fields = [
-        "desaddress", 'descomplement', 'desdistrict', 'descity', 'desstate', 'descountry'
+        "idaddress", "idperson", "desaddress", 'descomplement', 'desdistrict', 'descity', 'desstate', 'descountry'
     ];
     const SESSION_ERROR = 'AddressError';
     public static function getCep($nrcep){
@@ -51,7 +51,7 @@ class Address extends Model {
 
         $sql = new Sql();
 
-        $results = $sql->select("CALL sp_addresses(:idaddress, :idperson, :desaddress, 
+        $results = $sql->select("CALL sp_addresses_save(:idaddress, :idperson, :desaddress, 
         :descomplement, :descity, :desstate, :descountry, :deszipcode, :desdistrict)", [
             ':idaddress'=>$this->getidaddress(),
             ':idperson'=>$this->getidperson(),

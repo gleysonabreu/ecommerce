@@ -127,7 +127,7 @@ $app->get("/checkout", function(){
     $address = new Address();
     $cart = Cart::getFromSession();
 
-    if(isset($_GET['zipcode'])){
+    if(!isset($_GET['zipcode'])){
         $_GET['zipcode'] = $cart->getdeszipcode();
     }
 
@@ -141,13 +141,13 @@ $app->get("/checkout", function(){
         $cart->getCalculateTotal();
     }
 
-    if(!$address->getdesaddress()){ $address->setdesaddress('');}
-    if(!$address->getdescomplement()) {$address->setdescomplement('');}
-    if(!$address->getdesdistrict()){ $address->setdesdistrict('');}
-    if(!$address->getdescity()) {$address->setdescity('');}
-    if(!$address->getdesstate()) {$address->setdesstate('');}
-    if(!$address->getdescountry()){ $address->setdescountry('');}
-    if(!$address->getdeszipcode()) {$address->setdeszipcode('');}
+    if(!$address->getdesaddress()) $address->setdesaddress('');
+    if(!$address->getdescomplement()) $address->setdescomplement('');
+    if(!$address->getdesdistrict()) $address->setdesdistrict('');
+    if(!$address->getdescity()) $address->setdescity('');
+    if(!$address->getdesstate()) $address->setdesstate('');
+    if(!$address->getdescountry()) $address->setdescountry('');
+    if(!$address->getdeszipcode()) $address->setdeszipcode('');
 
 
 
@@ -201,12 +201,14 @@ $app->post("/checkout", function (){
         exit;
     }
 
-    $_POST['deszipcode'] = $_POST['zipcode'];
-    $_POST['idperson'] = $user->getidperson();
     $address = new Address();
 
-    $address->setData($_POST);
+    $_POST['deszipcode'] = $_POST['zipcode'];
+    $_POST['idperson'] = $user->getidperson();
 
+
+    $address->setData($_POST);
+    $address->save();
 
     header("Location: /order");
     exit;
