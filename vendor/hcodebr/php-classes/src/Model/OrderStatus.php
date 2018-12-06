@@ -9,6 +9,12 @@
         const PAGO = 3;
         const ENTREGUE = 4;
 
+        public static function listAll(){
+            $sql = new Sql();
+
+            return $sql->select("SELECT * FROM tb_ordersstatus ORDER BY desstatus");
+        }
+
     }
 
 ?>

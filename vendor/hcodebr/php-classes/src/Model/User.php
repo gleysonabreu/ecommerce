@@ -353,7 +353,7 @@ class User extends Model {
 
     }
 
-    public static function setErrorREgister($msg){
+    public static function setErrorRegister($msg){
         $_SESSION[User::ERROR_REGISTER]  = $msg;
     }
 
